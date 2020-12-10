@@ -1,4 +1,4 @@
-" Vim-plug Configurations
+" plug-vim configurations
 call plug#begin('~/.vim/plugged')
 " -------------------------------------------------------------------------
 " Make sure you use single quotes
@@ -27,8 +27,7 @@ Plug 'cakebaker/scss-syntax.vim'
 Plug 'joshdick/onedark.vim'
 " Improved nginx vim plug (incl. syntax highlighting)
 Plug 'chr4/nginx.vim'
-" THEME
-Plug 'morhetz/gruvbox'
+" 对括号们进行染色处理
 Plug 'kien/rainbow_parentheses.vim'
 " Seamless navigation between tmux panes and vim splits
 Plug 'tyru/open-browser.vim'
@@ -37,12 +36,24 @@ Plug 'vim-airline/vim-airline'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " Plug 代码补全功能
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" tagbar 你懂的, T-A-G
 Plug 'majutsushi/tagbar'
+" 多选, 使用方式就是按住 Ctrl 然后按上下来选.
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+" rust 语言支持
 Plug 'rust-lang/rust.vim'
+" 自动填充一对一对的输入
 Plug 'jiangmiao/auto-pairs'
+" statusbar ,下面的那个
 Plug 'vim-airline/vim-airline-themes'
+" .editorconfig支持
 Plug 'editorconfig/editorconfig-vim'
+Plug 'yggdroot/indentline'
+" 主题们
+Plug 'branwright1/salvation-vim'
+Plug 'kyoz/purify', { 'rtp': 'vim' }
+Plug 'morhetz/gruvbox'
+Plug 'ayu-theme/ayu-vim'
 " -------------------------------------------------------------------------
 " Initialize plug system
 
@@ -60,41 +71,42 @@ let g:NERDTreeGitStatusUseNerdFonts=1
 let NERDTreeIgnore=['node_modules','.vscode','.idea']  
 
 autocmd StdinReadPre * let s:std_in=1
-autocmd vimenter * NERDTree " 进入vim打开NerdTree
+autocmd vimenter * NERDTree
 
-" nerdtree 的快捷键配置
-map <C-b> :NERDTreeToggle<CR> 
+map <C-b> :NERDTreeToggle<CR>
 map <F8> :TagbarToggle<CR>
 map <S-A>f :Pre<CR>
 " ========= NERDTree config end =============
 
-" rust 保存自动格式化
 let g:rustfmt_autosave=1
 
 " ========= FZF config start start ==
 
-" 快捷键 查找文件 fzf
-noremap <C-p> :FZF --layout=reverse --ansi<CR>
-" fzf 针对查找文件打开方式的快捷键配置
+noremap <C-p> :FZF<CR>
+
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-o': 'vsplit' }
+
 " ========= FZF config start start =========
 
-" 一些vim的基础配置
 set number
 set cursorline
 set mouse=a
 nnoremap ; :
-colorscheme gruvbox
+colorscheme ayu
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
 set autoindent
 set smartindent
-
+set cursorline
+" 打开true color
+set termguicolors
+set nowrap
+set nolinebreak
 " 设置通过 快捷键来切换tab.
 function! TabPos_ActivateBuffer(num)
      let  s:count = a:num
@@ -110,6 +122,8 @@ endfunction
 autocmd vimenter * call TabPos_Initialize()
 
 " commands
-command! -nargs=0 Prettier :CocCommand prettier.formatFile " 格式化单个文件
-command! -nargs=0 JestCurrent :call CocAction('runCommand', 'jest.fileTest', ['%']) " 执行当前激活的测试用例文件
-command! JestInit :call CocAction('runCommand', 'jest.init') " Jest初始化
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+command! -nargs=0 JestCurrent :call CocAction('runCommand', 'jest.fileTest', ['%'])
+command! JestInit :call CocAction('runCommand', 'jest.init')
+
+noremap <F5> :JestCurrent<CR>
