@@ -42,13 +42,20 @@ Plug 'majutsushi/tagbar'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 " rust 语言支持
 Plug 'rust-lang/rust.vim'
-" 自动填充一对一对的输入
-Plug 'jiangmiao/auto-pairs'
 " statusbar ,下面的那个
 Plug 'vim-airline/vim-airline-themes'
 " .editorconfig支持
 Plug 'editorconfig/editorconfig-vim'
 Plug 'yggdroot/indentline'
+Plug 'craigemery/vim-autotag'
+" 添加头部的注释
+Plug 'ahonn/vim-fileheader'
+" JsDoc
+Plug 'heavenshell/vim-jsdoc'
+" The Nerd Commenter
+Plug 'scrooloose/nerdcommenter'
+" A simple alignment operator for Vim text editor
+Plug 'tommcdo/vim-lion'
 " 主题们
 Plug 'branwright1/salvation-vim'
 Plug 'kyoz/purify', { 'rtp': 'vim' }
@@ -68,7 +75,7 @@ let g:NERDTreeDirArrowExpandable=''
 let g:NERDTreeDirArrowCollapsible=''
 let g:NERDTreeGitStatusUseNerdFonts=1
 
-let NERDTreeIgnore=['node_modules','.vscode','.idea']  
+let NERDTreeIgnore=['node_modules','.vscode','.idea', '.git']  
 
 autocmd StdinReadPre * let s:std_in=1
 autocmd vimenter * NERDTree
@@ -107,6 +114,7 @@ set cursorline
 set termguicolors
 set nowrap
 set nolinebreak
+
 " 设置通过 快捷键来切换tab.
 function! TabPos_ActivateBuffer(num)
      let  s:count = a:num
@@ -127,3 +135,6 @@ command! -nargs=0 JestCurrent :call CocAction('runCommand', 'jest.fileTest', ['%
 command! JestInit :call CocAction('runCommand', 'jest.init')
 
 noremap <F5> :JestCurrent<CR>
+noremap <C-s> <Esc> :w<CR>
+noremap <C-s-a> <Esc> :wa<CR>
+noremap w <C-w>

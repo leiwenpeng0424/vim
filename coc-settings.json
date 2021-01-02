@@ -4,13 +4,19 @@
     "scss",
     "less",
     "markdown",
-    "typescript",
-    "javascript",
     "graphql",
-    "typescriptreact",
-    "javascriptreact",
     "json"
   ],
   "eslint.autoFixOnSave": true,
-  "eslint.options": {}
+  "eslint.options": {
+    "ignorePatterns": [".git", "node_modules", "dist", "build", "test"]
+  },
+  "sh.enable": true,
+  "suggest.autoTrigger": "always",
+  "suggest.floatEnable": true,
+  "suggest.numberSelect": true,
+  "suggest.enablePreselect": true,
+  "suggest.enablePreview": true,
+  "suggest.triggerAfterInsertEnter": false,
+  "suggest.noselect": false
 }
